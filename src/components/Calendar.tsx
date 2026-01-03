@@ -66,10 +66,13 @@ export const Calendar = () => {
             </div>
             <div className="grid grid-cols-7 w-full gap-1">
                 {cells.map((cell, idx) => (
-                    cell.date ? (
-                        <div key={idx} className="text-center">{cell.date.getDate()}</div>
-                    ) : null
-                ))}
+                    <div
+                        key={idx}
+                        className="text-center aspect-square flex items-center justify-center"
+                    >
+                        {cell.date ? cell.date.getDate() : ""}
+                    </div> ))
+                }
             </div>
         </div>
     )
