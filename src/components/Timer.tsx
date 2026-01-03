@@ -1,5 +1,6 @@
 import {useSessionStore} from "../data/sessionStore.tsx";
 import {useSessionClock} from "../data/hooks.tsx";
+import {formatTime} from "../utils/helpers.ts";
 
 export const Timer = () => {
     const { startTime, startSession, endSession, sessionActive} = useSessionStore()
@@ -15,8 +16,8 @@ export const Timer = () => {
         }
     }
 
-    const minutes = String(Math.floor(elapsedTime / 60000)).padStart(2, '0')
-    const seconds = String(Math.floor((elapsedTime % 60000) / 1000)).padStart(2, '0')
+    // const minutes = String(Math.floor(elapsedTime / 60000)).padStart(2, '0')
+    // const seconds = String(Math.floor((elapsedTime % 60000) / 1000)).padStart(2, '0')
 
     return (
         <div className="text-white font-bold flex flex-col gap-2">
@@ -25,9 +26,7 @@ export const Timer = () => {
                 {`${sessionActive ? 'End': 'Start'}`} Timer</button>
 
             <span className="inline-flex">
-                <p>{minutes}</p>
-                <p>:</p>
-                <p>{seconds}</p>
+                <p>{formatTime(elapsedTime)}</p>
             </span>
 
         </div>

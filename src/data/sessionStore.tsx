@@ -1,27 +1,60 @@
 import { create} from "zustand/react";
+import { persist} from "zustand/middleware";
 
-type Session = {
+type CompletedSession = {
+    startTime: number;
+    endTime: number;
+    duration: number;
+}
+
+type SessionStore = {
     sessionActive: boolean;
     startTime: number | null;
-    endTime: number | null;
-    duration: number | null;
+
+    sessions: CompletedSession[];
+
     startSession: () => void;
     endSession: () => void;
 }
 
-export const useSessionStore = create<Session>((set) => ({
-    sessionActive: false,
-    startTime: null,
-    endTime: null,
-    duration: null,
 
-    startSession: () => set({
-        sessionActive: true,
-        startTime: Date.now()
-    }),
 
-    endSession: () => set({
-        sessionActive: false,
-        endTime: Date.now(),
-    })
-}))
+export const useSessionStore = create<SessionStore>()(
+    persist(
+        (set, get) => ({
+            sessionActive: false,
+            startTime: null,
+            sessions: [],
+
+            startSession: () =>
+                set({
+                    sessionActive: true,
+                    startTime: Date.now(),
+                }),
+
+            endSession: () => {
+                const { startTime, sessions } = get()
+
+                if (!startTime) return
+
+                const endTime = Date.now()
+                const duration = endTime - startTime
+
+                set({
+                    sessionActive: false,
+                    startTime: null,
+                    sessions: [
+                        ...sessions,
+                        { startTime, endTime, duration },
+                    ],
+                })
+            },
+        }),
+        {
+            name: "momentum-sessions",
+            partialize: (state) => ({
+                sessions: state.sessions,
+            }),
+        }
+    )
+)
