@@ -8,5 +8,5 @@ export const formatTime = (time: number) => {
     const minutes = String(Math.floor((time % HOURS_MS) / MINUTES_MS)).padStart(2, '0')
     const seconds = String(Math.floor((time % MINUTES_MS) / SECONDS_MS)).padStart(2, '0')
 
-    return `${hours}:${minutes}:${seconds}`
+    return hours > 0 ? `${hours}:${minutes}:${seconds}` : `${minutes}:${seconds}`;
 }
