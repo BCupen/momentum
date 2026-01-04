@@ -16,19 +16,16 @@ export const Timer = () => {
         }
     }
 
-    // const minutes = String(Math.floor(elapsedTime / 60000)).padStart(2, '0')
-    // const seconds = String(Math.floor((elapsedTime % 60000) / 1000)).padStart(2, '0')
-
     return (
-        <div className="text-white font-bold flex flex-col gap-2">
-            <button className="bg-blue-200 p-3 rounded-md max-w-sm"
-             onClick={() => handleTimerClick()}>
-                {`${sessionActive ? 'End': 'Start'}`} Timer</button>
+        <div className="text-white font-bold flex flex-col items-center gap-6">
 
-            <span className="inline-flex">
-                <p>{formatTime(elapsedTime)}</p>
+
+            <span className="tabular-nums w-full text-center">
+                <p className="tabular-nums text-5xl">{formatTime(elapsedTime)}</p>
             </span>
-
+            <button className="bg-blue-600 w-1/2 p-3 rounded-md text-text-primary"
+                    onClick={() => handleTimerClick()}>
+                {`${sessionActive ? 'End': 'Start'}`}</button>
         </div>
     )
 

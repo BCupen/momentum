@@ -6,7 +6,7 @@ export const SessionList = () => {
         <ul>
             {sessions.map((session) => (
                 <li className="border-b border-gray-400">
-                    <p>{session.duration}</p>
+                    <p>{new Date(session.startTime).getDate()}</p>
                 </li>
             ))}
         </ul>

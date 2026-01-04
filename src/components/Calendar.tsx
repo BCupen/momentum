@@ -37,6 +37,7 @@ export const Calendar = () => {
     const dailyTotals = useMemo(() => {
         return groupDailySessions(sessions);
     }, [sessions]);
+    console.log(sessions);
 
     const cells: CalendarCell[] = useMemo(() => {
         const firstDay= new Date(today.getFullYear(), today.getMonth(), 1)
@@ -79,6 +80,7 @@ export const Calendar = () => {
                     const totalMs = dateKey
                         ? dailyTotals[dateKey] ?? 0
                         : 0;
+                    // console.log(`${dateKey}: ${totalMs}`)
 
                     const heatClass = getIntensityColor(totalMs);
 
