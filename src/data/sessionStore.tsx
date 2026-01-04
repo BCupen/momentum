@@ -1,7 +1,7 @@
 import { create} from "zustand/react";
 import { persist} from "zustand/middleware";
 
-type CompletedSession = {
+export type CompletedSession = {
     startTime: number;
     endTime: number;
     duration: number;

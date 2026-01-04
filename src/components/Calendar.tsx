@@ -1,4 +1,6 @@
 import {useMemo, useState} from "react";
+import {useSessionStore} from "../data/sessionStore.tsx";
+import {getIntensityColor, groupDailySessions} from "../utils/helpers.ts";
 
 const months = [
     "January",
@@ -31,6 +33,10 @@ type CalendarCell = {
 
 export const Calendar = () => {
     const [ today ] = useState<Date>(() => new Date());
+    const sessions = useSessionStore(state => state.sessions);
+    const dailyTotals = useMemo(() => {
+        return groupDailySessions(sessions);
+    }, [sessions]);
 
     const cells: CalendarCell[] = useMemo(() => {
         const firstDay= new Date(today.getFullYear(), today.getMonth(), 1)
@@ -40,7 +46,7 @@ export const Calendar = () => {
         const monthCells: CalendarCell[] = []
 
         for (let i = 0; i < startDay; i++){
-            monthCells.push({ date: null})
+            monthCells.push({ date: null });
         }
 
         for (let day = 1; day <= daysOfMonth; day++){
@@ -57,22 +63,34 @@ export const Calendar = () => {
 
 
     return (
-        <div className="mt-6 w-full flex flex-col items-center gap-2 justify-center">
+        <div className="mt-6 w-full flex flex-col items-center gap-2 justify-center bg-gray-50 text-black p-5">
             <h3 className="text-xl font-bold leading-2">{months[today.getMonth()]}</h3>
             <div className="grid grid-cols-7 w-full">
                 {weekDays.map(day => (
                     <div key={day} className=" rounded-lg text-center">{day.substring(0,3)}</div>
                 ))}
             </div>
-            <div className="grid grid-cols-7 w-full gap-1">
-                {cells.map((cell, idx) => (
-                    <div
-                        key={idx}
-                        className="text-center aspect-square flex items-center justify-center"
-                    >
-                        {cell.date ? cell.date.getDate() : ""}
-                    </div> ))
-                }
+            <div className="grid grid-cols-7 w-full gap-1 place-items-center">
+                {cells.map((cell, idx) => {
+                    const dateKey = cell.date
+                        ? cell.date.toISOString().split("T")[0]
+                        : null;
+
+                    const totalMs = dateKey
+                        ? dailyTotals[dateKey] ?? 0
+                        : 0;
+
+                    const heatClass = getIntensityColor(totalMs);
+
+                    return (
+                        <div
+                            key={idx}
+                            className={`aspect-square w-8 rounded-md flex items-center justify-center text-sm ${heatClass}`}
+                        >
+                            {cell.date ? cell.date.getDate() : ""}
+                        </div>
+                    );
+                })}
             </div>
         </div>
     )
