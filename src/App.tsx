@@ -1,6 +1,7 @@
 import {Timer} from "./components/Timer.tsx";
 import {SessionList} from "./components/SessionList.tsx";
 import {Calendar} from "./components/Calendar.tsx";
+import {SnowballCanvas} from "./components/Snowball.tsx";
 
 export const App = () => {
     return (
@@ -9,6 +10,7 @@ export const App = () => {
             <Timer />
             <SessionList />
             <Calendar />
+            <SnowballCanvas elapsedMs={1000} />
         </div>
     )
 }
