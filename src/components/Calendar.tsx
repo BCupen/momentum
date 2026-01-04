@@ -31,7 +31,11 @@ type CalendarCell = {
     date: Date | null;
 }
 
-export const Calendar = () => {
+interface Props {
+    setSelectedDate: (date: number) => void;
+}
+
+export const Calendar = ({setSelectedDate}: Props) => {
     const [ today ] = useState<Date>(() => new Date());
     const sessions = useSessionStore(state => state.sessions);
     const dailyTotals = useMemo(() => {
@@ -88,6 +92,10 @@ export const Calendar = () => {
                         <div
                             key={idx}
                             className={`aspect-square w-8 rounded-md flex items-center justify-center text-sm ${heatClass}`}
+                            onClick={() => {
+                                if (cell.date)
+                                setSelectedDate(cell.date?.getTime())
+                            }}
                         >
                             {cell.date ? cell.date.getDate() : ""}
                         </div>
