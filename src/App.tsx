@@ -1,16 +1,18 @@
-import {Timer} from "./components/Timer.tsx";
-import {SnowballCanvas} from "./components/Snowball.tsx";
 import {BottomNav} from "./components/BottomNav.tsx";
+import {Route, Routes} from "react-router";
+import {Session} from "./pages/Session.tsx";
+import {Insights} from "./pages/Insights.tsx";
 
 export const App = () => {
     return (
         <div className="relative min-h-dvh w-full md:max-w-md  bg-slate-900 p-5">
             <h1 className="font-bold text-text-primary w-full text-center text-2xl">Momentum</h1>
 
-            <main className="flex flex-col gap-9 mt-9">
-                <SnowballCanvas />
-                <Timer />
-            </main>
+            <Routes>
+                <Route index element={<Session />}/>
+                <Route path={'/insights'} element={<Insights />}/>
+            </Routes>
+
 
             <BottomNav />
         </div>

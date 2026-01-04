@@ -38,17 +38,14 @@ export const  getLocalDateKey = (timestamp: number) => {
 
 export const getIntensityColor = (duration: number) => {
     if (!duration || duration == 0) {
-        return 'bg-transparent'
+        return 'bg-intensity-none'
     }
     if (duration < 30 * MINUTES_MS ) {
-        return 'bg-blue-200'
+        return 'bg-intensity-low'
     }
-    if (duration < HOURS_MS) {
-        return 'bg-blue-400'
-    }
-    if ( duration < 2 * HOURS_MS) {
-        return 'bg-blue-500'
+    if (duration < 2 *HOURS_MS) {
+        return 'bg-intensity-medium'
     }
 
-    return 'bg-blue-600'
+    return 'bg-intensity-high'
 }

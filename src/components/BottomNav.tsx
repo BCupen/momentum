@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useSessionStore} from "../data/sessionStore.tsx";
+import {Link} from "react-router";
 
 export const BottomNav = () => {
     const sessionActive = useSessionStore(s => s.sessionActive);
@@ -27,9 +28,9 @@ export const BottomNav = () => {
                 : "translate-y-0 opacity-100"}
       `}
         >
-            <div className="text-slate-200">Home</div>
-            <div className="text-slate-200">Calendar</div>
-            <div className="text-slate-200">Settings</div>
+            <Link to={'/'} className={`text-slate-200`}>Home</Link>
+            <Link to={'/insights'} className={`text-slate-200`}>Calendar</Link>
+            <Link to={'/settings'} className={`text-slate-200`}>Settings</Link>
         </nav>
     );
 };

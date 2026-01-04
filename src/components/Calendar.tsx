@@ -64,9 +64,9 @@ export const Calendar = () => {
 
 
     return (
-        <div className="mt-6 w-full flex flex-col items-center gap-2 justify-center bg-gray-50 text-black p-5">
+        <div className="mt-6 w-full flex flex-col items-center gap-2 justify-center bg-slate-950 text-text-primary rounded-lg p-5">
             <h3 className="text-xl font-bold leading-2">{months[today.getMonth()]}</h3>
-            <div className="grid grid-cols-7 w-full">
+            <div className="grid grid-cols-7 w-full mt-2">
                 {weekDays.map(day => (
                     <div key={day} className=" rounded-lg text-center">{day.substring(0,3)}</div>
                 ))}
