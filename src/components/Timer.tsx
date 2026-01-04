@@ -23,7 +23,7 @@ export const Timer = () => {
             <span className="tabular-nums w-full text-center">
                 <p className="tabular-nums text-5xl">{formatTime(elapsedTime)}</p>
             </span>
-            <button className="bg-blue-600 w-1/2 p-3 rounded-md text-text-primary"
+            <button className="bg-blue-600 w-1/2 p-3 rounded-md text-text-primary cursor-pointer"
                     onClick={() => handleTimerClick()}>
                 {`${sessionActive ? 'End': 'Start'}`}</button>
         </div>

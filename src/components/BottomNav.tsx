@@ -20,7 +20,7 @@ export const BottomNav = () => {
         <nav
             className={`
         fixed bottom-0 left-1/2 -translate-x-1/2 z-50
-        w-[90%] p-5 flex justify-evenly rounded-t-lg
+        w-[90%] lg:w-1/3 p-5 flex justify-evenly rounded-t-lg
         bg-slate-950
         transition-all duration-300 ease-out
         ${hide

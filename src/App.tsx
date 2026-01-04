@@ -5,7 +5,7 @@ import {Insights} from "./pages/Insights.tsx";
 
 export const App = () => {
     return (
-        <div className="relative min-h-dvh w-full md:max-w-md  bg-slate-900 p-5">
+        <div className="relative min-h-dvh w-full md:max-w-md mx-auto bg-slate-900 p-5">
             <h1 className="font-bold text-text-primary w-full text-center text-2xl">Momentum</h1>
 
             <Routes>
