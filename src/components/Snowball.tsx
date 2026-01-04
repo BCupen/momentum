@@ -91,5 +91,5 @@ export const SnowballCanvas = () => {
 
 function snowballRadius(elapsedMs: number) {
     const seconds = elapsedMs / 1000;
-    return Math.min(80, 10 + Math.sqrt(seconds) * 6);
+    return Math.min(80, 5 + Math.sqrt(seconds) * 3);
 }
