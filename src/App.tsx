@@ -2,6 +2,7 @@ import {BottomNav} from "./components/BottomNav.tsx";
 import {Route, Routes} from "react-router";
 import {Session} from "./pages/Session.tsx";
 import {Insights} from "./pages/Insights.tsx";
+import {SessionDetails} from "./pages/SessionDetails.tsx";
 
 export const App = () => {
     return (
@@ -11,6 +12,7 @@ export const App = () => {
             <Routes>
                 <Route index element={<Session />}/>
                 <Route path={'/insights'} element={<Insights />}/>
+                <Route path={'/details'} element={<SessionDetails />} />
             </Routes>
 
 

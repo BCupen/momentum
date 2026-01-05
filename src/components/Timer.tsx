@@ -1,10 +1,12 @@
 import {useSessionStore} from "../data/sessionStore.tsx";
 import {useSessionClock} from "../data/hooks.tsx";
 import {formatTime} from "../utils/helpers.ts";
+import {useNavigate} from "react-router";
 
 export const Timer = () => {
     const { startTime, startSession, endSession, sessionActive} = useSessionStore()
     const now = useSessionClock()
+    const navigate = useNavigate()
 
     const elapsedTime = startTime && now ? now - startTime : 0
 
@@ -13,6 +15,9 @@ export const Timer = () => {
             startSession()
         } else {
             endSession()
+            setTimeout(() => {
+                navigate("/details")
+            }, 2000)
         }
     }
 
