@@ -5,6 +5,8 @@ export type CompletedSession = {
     startTime: number;
     endTime: number;
     duration: number;
+    name?: string;
+    note?: string;
 }
 
 type SessionStore = {
@@ -15,6 +17,8 @@ type SessionStore = {
 
     startSession: () => void;
     endSession: () => void;
+    updateLatestSessionDetails: (details: { name: string; note: string }) => void;
+    deleteLatestSession: () => void;
 }
 
 
@@ -48,6 +52,31 @@ export const useSessionStore = create<SessionStore>()(
                         { startTime, endTime, duration },
                     ],
                 })
+            },
+
+            updateLatestSessionDetails: ({ name, note }) => {
+                const { sessions } = get()
+
+                if (!sessions.length) return
+
+                const updatedSessions = [...sessions]
+                const latest = updatedSessions[updatedSessions.length - 1]
+
+                updatedSessions[updatedSessions.length - 1] = {
+                    ...latest,
+                    name,
+                    note,
+                }
+
+                set({ sessions: updatedSessions })
+            },
+
+            deleteLatestSession: () => {
+                const { sessions } = get()
+
+                if (!sessions.length) return
+
+                set({ sessions: sessions.slice(0, -1) })
             },
         }),
         {
